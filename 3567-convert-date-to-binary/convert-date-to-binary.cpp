@@ -12,7 +12,7 @@ private:
     }
 public:
     string convertDateToBinary(string date) {
-        int index = 0, len = date.length();
+        int index = 0;
         while (date[index] != '-') index++;
         return toBinary(date.substr(0, index)) + '-' + toBinary(date.substr(index+1, 2)) + '-' + toBinary(date.substr(index+4, 2));
     }
