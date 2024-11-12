@@ -1,8 +1,7 @@
 class Solution {
 public:
-    typedef pair<int, int> pi; 
     vector<int> maximumBeauty(vector<vector<int>>& items, vector<int>& queries) {
-        priority_queue<pi, vector<pi>, greater<pi>> pq;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         unordered_map<int, int> mp;
         vector<int> ans = queries;
         sort(queries.begin(), queries.end());
