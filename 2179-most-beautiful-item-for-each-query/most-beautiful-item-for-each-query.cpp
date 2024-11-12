@@ -5,20 +5,17 @@ public:
         unordered_map<int, int> mp;
         vector<int> ans = queries;
         sort(queries.begin(), queries.end());
-        for (auto& item: items) pq.push(make_pair(item[0], item[1]));
+        for (auto& item: items) pq.push(make_pair(item[0], item[1])); //price, beauty
         int maxBeauty = 0;
         for (auto& query: queries){
-            while (!pq.empty()){
+            while (query >= pq.top().first){
                 int currPrice = pq.top().first, currBeauty = pq.top().second;
-                if (query >= currPrice){
-                    maxBeauty = max(maxBeauty, currBeauty);
-                    pq.pop();
-                    if (pq.empty() || query < pq.top().first) {
-                        pq.push(make_pair(currPrice, currBeauty));
-                        break;
-                    }
+                maxBeauty = max(maxBeauty, currBeauty);
+                pq.pop();
+                if (pq.empty() || query < pq.top().first) {
+                    pq.push(make_pair(currPrice, currBeauty));
+                    break;
                 }
-                else break;
             }
             mp[query] = maxBeauty;
         }
