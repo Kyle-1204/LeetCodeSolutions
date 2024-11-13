@@ -2,9 +2,8 @@ class Solution {
 public:
     vector<int> distinctDifferenceArray(vector<int>& nums) {
         unordered_map<int, int> left, right;
-        int size = nums.size();
-        vector<int> ans(size);
-        size--;
+        int size = nums.size() - 1;
+        vector<int> ans(size + 1);
         for (int i = 0; i <= size; i++){
             int leftVal = nums[i], rightVal = nums[size - i];
             left[leftVal]++;
