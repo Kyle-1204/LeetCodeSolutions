@@ -4,7 +4,6 @@ public:
         long long numPairs = 0;
         int size = nums.size() - 1,  start = 0, right;
         sort(nums.begin(), nums.end());
-        for (auto& num: nums) cout << num << " ";
         int currNum = nums[0];
         while (start < size && currNum + nums[start + 1] < lower) start++;
         if (nums[size] + currNum <= upper) right = size;
@@ -14,8 +13,8 @@ public:
         }
         numPairs += (right - start);
         for (int left = 1; left < size; left++){
+            if (right < left) break;
             start = max(left, start);
-            right = max(left, right);
             currNum = nums[left];
             while (start > left && currNum + nums[start] >= lower) start--;
             while (right > left && currNum + nums[right] > upper) right--;
