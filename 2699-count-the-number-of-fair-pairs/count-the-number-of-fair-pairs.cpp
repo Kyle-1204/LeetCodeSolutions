@@ -6,11 +6,8 @@ public:
         sort(nums.begin(), nums.end());
         int currNum = nums[0];
         while (start < size && currNum + nums[start + 1] < lower) start++;
-        if (nums[size] + currNum <= upper) right = size;
-        else{
-            right = start;
-            while (right < size && currNum + nums[right+1] <= upper) right++;
-        }
+        right = start;
+        while (right < size && currNum + nums[right+1] <= upper) right++;
         numPairs += (right - start);
         for (int left = 1; left < size; left++){
             if (right < left) break;
