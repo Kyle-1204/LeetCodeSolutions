@@ -15,10 +15,7 @@ public:
         minVal = min(size - left, right);
         int rightStart = right;
         while (left >= 0){
-            while (right < size && arr[right] < arr[left]){
-                right++;
-            }
-            cout << "Left: " << left << "  " << " Right:" << right << endl;
+            while (right < size && arr[right] < arr[left]) right++;
             if (arr[right] >= arr[left]) minVal = min(right - left - 1, minVal);
             right = rightStart;
             left--;
