@@ -1,15 +1,15 @@
 class ParkingSystem {
 public:
-    vector<int> slots = vector<int>(3);
+    unordered_map<int, int> slots = {{1, 0}, {2,0}, {3,0}};
     ParkingSystem(int big, int medium, int small) {
-        slots[0] = big;
-        slots[1] = medium;
-        slots[2] = small;
+        slots[1] = big;
+        slots[2] = medium;
+        slots[3] = small;
     }
     
     bool addCar(int carType) {
-        if (slots[carType - 1]){
-            slots[carType - 1]--;
+        if (slots[carType]){
+            slots[carType]--;
             return true;
         }
         return false;
