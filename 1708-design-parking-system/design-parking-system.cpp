@@ -1,10 +1,10 @@
 class ParkingSystem {
 public:
-    unordered_map<int, int> slots = {{1, 0}, {2,0}, {3,0}};
+    vector<int> slots = {0};
     ParkingSystem(int big, int medium, int small) {
-        slots[1] = big;
-        slots[2] = medium;
-        slots[3] = small;
+        slots.push_back(big);
+        slots.push_back(medium);
+        slots.push_back(small);
     }
     
     bool addCar(int carType) {
