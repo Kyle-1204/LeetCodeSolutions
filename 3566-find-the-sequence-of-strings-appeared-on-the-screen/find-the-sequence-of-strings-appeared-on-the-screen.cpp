@@ -2,13 +2,13 @@ class Solution {
 public:
     vector<string> stringSequence(string target) {
         string str = "a";
-        int currLen = 1;
+        int index = 0;
         vector<string> ans;
         while (str != target){
             ans.push_back(str);
-            if (str != target.substr(0, currLen)) str[currLen-1]++;
+            if (str[index] != target[index]) str[index]++;
             else{
-                currLen++;
+                index++;
                 str += 'a';
             }
         }
