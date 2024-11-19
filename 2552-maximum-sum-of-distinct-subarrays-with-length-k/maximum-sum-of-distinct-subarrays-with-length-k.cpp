@@ -9,15 +9,14 @@ public:
             mp[num]++;
         }
         if (mp.size() == k) maxSum = max(maxSum, sum);
-        int left = k, size = nums.size();
-        while (left < size){
-            int numRemoved = nums[left - k], numAdded = nums[left];
+        int size = nums.size();
+        for (int i = k; i < size; i++){
+            int numRemoved = nums[i - k], numAdded = nums[i];
             sum += numAdded - numRemoved;
             mp[numRemoved]--;
             if (mp[numRemoved] == 0) mp.erase(numRemoved);
             mp[numAdded]++;
             if (mp.size() == k) maxSum = max(maxSum, sum);
-            left++;
         }
         return maxSum;
     }
