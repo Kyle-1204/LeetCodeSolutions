@@ -2,27 +2,26 @@ class Solution {
 public:
     int takeCharacters(string s, int k) {
         int left = 0, len = s.length(), right = len - 1;
-        vector<int> vect(3);
-        while (left < len && (vect[0] < k || vect[1] < k || vect[2] < k)){
-            vect[s[left] - 'a']++;
+        unordered_map<char, int> mp = {{'a', 0}, {'b', 0}, {'c', 0}};
+        while (left < len && (mp['a'] < k || mp['b'] < k || mp['c'] < k)){
+            mp[s[left]]++;
             left++;
         }
-        if (vect[0] < k || vect[1] < k || vect[2] < k) return -1;
+        if (mp['a'] < k || mp['b'] < k || mp['c'] < k) return -1;
         int minLen = left;
         left--;
         while (left >= 0){
             char chr = s[left];
-            vect[chr - 'a']--;
+            mp[chr]--;
             left--;
-            while (vect[chr - 'a'] < k){
-                vect[s[right] - 'a']++;
+            while (mp[chr] < k){
+                mp[s[right]]++;
                 right--;
             }
-            while (left >= 0 && vect[s[left] - 'a'] > k){
-                vect[s[left] - 'a']--;
+            while (left >= 0 && mp[s[left]] > k){
+                mp[s[left]]--;
                 left--;
             }
-            //cout << "Left: " << left << " Right: " << right << endl;
             minLen = min(left + (len - right), minLen);
         }
         return minLen;
