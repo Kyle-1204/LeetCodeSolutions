@@ -2,24 +2,24 @@ class Solution {
 public:
     int takeCharacters(string s, int k) {
         int left = 0, len = s.length(), right = len - 1;
-        unordered_map<char, int> mp = {{'a', 0}, {'b', 0}, {'c', 0}};
-        while (left < len && (mp['a'] < k || mp['b'] < k || mp['c'] < k)){
-            mp[s[left]]++;
+        vector<int> vect(3);
+        while (left < len && (vect[0] < k || vect[1] < k || vect[2] < k)){
+            vect[s[left] - 'a']++;
             left++;
         }
-        if (mp['a'] < k || mp['b'] < k || mp['c'] < k) return -1;
+        if (vect[0] < k || vect[1] < k || vect[2] < k) return -1;
         int minLen = left;
         left--;
         while (left >= 0){
             char chr = s[left];
-            mp[chr]--;
+            vect[chr - 'a']--;
             left--;
-            while (mp[chr] < k){
-                mp[s[right]]++;
+            while (vect[chr - 'a'] < k){
+                vect[s[right] - 'a']++;
                 right--;
             }
-            while (left >= 0 && mp[s[left]] > k){
-                mp[s[left]]--;
+            while (left >= 0 && vect[s[left] - 'a'] > k){
+                vect[s[left] - 'a']--;
                 left--;
             }
             minLen = min(left + (len - right), minLen);
