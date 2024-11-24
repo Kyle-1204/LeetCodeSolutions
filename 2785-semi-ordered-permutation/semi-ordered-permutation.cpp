@@ -9,7 +9,7 @@ public:
                 if (firstValFound) return first + last;
                 firstValFound = true;
             }
-            if (nums[i] == n){
+            else if (nums[i] == n){
                 last = n - i - 1;
                 if (firstValFound) return first + last;
                 last--;
