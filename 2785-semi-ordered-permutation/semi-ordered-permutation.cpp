@@ -2,17 +2,16 @@ class Solution {
 public:
     int semiOrderedPermutation(vector<int>& nums) {
         bool firstValFound = false;
-        int first = INT_MAX, last = INT_MAX, n = nums.size();
+        int firstVal, n = nums.size();
         for (int i = 0; i < n; i++){
             if (nums[i] == 1){
-                first = i;
-                if (firstValFound) return first + last;
+                if (firstValFound) return firstVal + i;
+                firstVal = i;
                 firstValFound = true;
             }
             else if (nums[i] == n){
-                last = n - i - 1;
-                if (firstValFound) return first + last;
-                last--;
+                if (firstValFound) return firstVal + n - i - 1;
+                firstVal = n - i - 2;
                 firstValFound = true;
             }
         }
