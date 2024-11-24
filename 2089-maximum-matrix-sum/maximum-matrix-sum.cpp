@@ -5,10 +5,16 @@ public:
         int numNegative = 0, minVal = INT_MAX;
         for (auto& row: matrix){
             for (auto& val: row){
-                int absVal = abs(val);
-                sum += absVal;
-                if (val < 0) numNegative++;
-                minVal = min(minVal, absVal);
+                if (val < 0) {
+                    int absVal = abs(val);
+                    sum += absVal;
+                    numNegative++;
+                    minVal = min(minVal, absVal);
+                }
+                else{
+                    sum += val;
+                    minVal = min(minVal, val);
+                }
             }
         }
         return (numNegative % 2 ? sum - (2 * minVal) : sum);
