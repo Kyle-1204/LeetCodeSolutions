@@ -3,12 +3,9 @@ private:
     bool compareSums(string str){
         int len = str.length();
         if (len % 2) return false;
-        int firstSum = 0, secondSum = 0, half = len/2;
-        for (int i = 0; i < half; i++){
-            firstSum += (str[i] - '0');
-            secondSum += (str[len - i - 1] - '0');
-        }
-        return firstSum == secondSum;
+        int sum = 0, half = len/2;
+        for (int i = 0; i < half; i++) sum += (str[i] - '0') - (str[len - i - 1] - '0');
+        return sum == 0;
     }
 public:
     int countSymmetricIntegers(int low, int high) {
