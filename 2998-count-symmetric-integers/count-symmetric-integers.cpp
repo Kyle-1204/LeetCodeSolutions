@@ -4,8 +4,9 @@ private:
         int len = str.length();
         if (len % 2) return false;
         int sum = 0, half = len/2;
-        for (int i = 0; i < half; i++) sum += (str[i] - '0') - (str[len - i - 1] - '0');
-        return sum == 0;
+        len--;
+        for (int i = 0; i < half; i++) sum += (str[i] - '0') - (str[len - i] - '0');
+        return !sum;
     }
 public:
     int countSymmetricIntegers(int low, int high) {
