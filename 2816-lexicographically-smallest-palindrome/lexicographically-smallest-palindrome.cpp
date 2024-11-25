@@ -3,9 +3,10 @@ public:
     string makeSmallestPalindrome(string s) {
         int left = 0, right = s.length() - 1;
         while (left < right){
-            if (s[left] != s[right]){
-                if (s[left] > s[right]) s[left] = s[right];
-                else s[right] = s[left];
+            char l = s[left], r = s[right];
+            if (l != r){
+                if (l > r) s[left] = r;
+                else s[right] = l;
             }
             left++;
             right--;
