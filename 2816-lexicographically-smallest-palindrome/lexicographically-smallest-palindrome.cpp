@@ -3,11 +3,8 @@ public:
     string makeSmallestPalindrome(string s) {
         int left = 0, right = s.length() - 1;
         while (left < right){
-            char l = s[left], r = s[right];
-            if (l != r){
-                if (l > r) s[left] = r;
-                else s[right] = l;
-            }
+            if (s[left] > s[right]) s[left] = s[right];
+            else if (s[right] > s[left]) s[right] = s[left];
             left++;
             right--;
         }
