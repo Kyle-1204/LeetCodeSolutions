@@ -1,10 +1,7 @@
 class Solution {
 public:
     bool doesAliceWin(string s) {
-        string vowels = "aeiou";
-        for (auto& chr: s){
-            if (vowels.find(chr) != string::npos) return true;
-        }
+        for (auto& c: s) if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') return true;
         return false;
     }
 };
