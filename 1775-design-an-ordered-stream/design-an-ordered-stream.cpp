@@ -1,20 +1,18 @@
 class OrderedStream {
 public:
     vector<string> stream;
-    int currIndex = 0;
+    int currIndex = 0, size;
     OrderedStream(int n) {
         stream = vector<string>(n);
+        size = n;
     }
     
     vector<string> insert(int idKey, string value) {
         stream[idKey-1] = value;
         vector<string> ans;
-        for (int i = currIndex; i < stream.size(); i++){
-            if (stream[i] == "") break;
-            else {
-                ans.push_back(stream[i]);
-                currIndex++;
-            }
+        while (currIndex < size && stream[currIndex] != ""){
+            ans.push_back(stream[currIndex]);
+            currIndex++;
         }
         return ans;
     }
