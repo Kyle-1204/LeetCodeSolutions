@@ -5,11 +5,11 @@ public:
         int end = num.length() - 1;
         for (int i = end; i >= 0; i--){
             if (fiveFound && (num[i] == '7' || num[i] == '2')) return end - i - 1;
-            if (num[i] == '0'){
+            else if (num[i] == '0'){
                 if (zeroFound) return end - i - 1;
                 zeroFound = true;
             }
-            if (num[i] == '5') {
+            else if (num[i] == '5') {
                 if (zeroFound) return end - i - 1;
                 fiveFound = true;
             }
