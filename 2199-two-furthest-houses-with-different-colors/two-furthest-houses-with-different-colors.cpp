@@ -5,7 +5,6 @@ public:
         while (end - left > maxDiff){
             int startHouse = colors[left], right = end;
             while (colors[right] == startHouse) right--;
-            cout << left << "   " << right << endl;
             maxDiff = max(maxDiff, right - left);
             left++;
         }
