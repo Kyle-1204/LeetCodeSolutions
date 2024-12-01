@@ -5,10 +5,7 @@ public:
         if (numRows == 1) return matrix[0];
         if (numCols == 1){
             vector<int> vals(numRows);
-            while (i < numRows){
-                vals[i] = matrix[i][0];
-                i++;
-            }
+            while (i < numRows) vals[i++] = matrix[i][0];
             return vals;
         }
         int size = numCols * numRows, x = 0, y = 0, dir = 0;
