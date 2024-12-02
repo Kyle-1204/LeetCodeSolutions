@@ -9,13 +9,15 @@ public:
                     numZeroes++;
                     right++;
                 }
-                while (right < len && s[right] == '1'){
-                    numOnes++;
-                    if (numOnes == numZeroes) {
-                        maxLen = max(maxLen, numOnes * 2);
-                        break;
+                if (numZeroes * 2 > maxLen){
+                    while (right < len && s[right] == '1'){
+                        numOnes++;
+                        if (numOnes == numZeroes) {
+                            maxLen = max(maxLen, numOnes * 2);
+                            break;
+                        }
+                        right++;
                     }
-                    right++;
                 }
             }
         }
