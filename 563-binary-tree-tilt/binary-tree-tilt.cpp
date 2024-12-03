@@ -25,11 +25,16 @@ public:
         q.push(root);
         while (!q.empty()){
             TreeNode* node = q.front();
-            int left = (node->left != NULL ? addVals(node->left) : 0);
-            int right = (node->right != NULL ? addVals(node->right) : 0);
+            int left = 0, right = 0;
+            if (node->left != NULL){
+                q.push(node->left);
+                left = addVals(node->left);
+            }
+            if (node->right != NULL){
+                q.push(node->right);
+                right = addVals(node->right);
+            }
             sum += abs(left - right);
-            if (node->left != NULL) q.push(node->left);
-            if (node->right != NULL) q.push(node->right);
             q.pop();
         }
         return sum;
