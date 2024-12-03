@@ -13,10 +13,9 @@ class Solution {
 private:
     vector<int> vals;
     void addVals(TreeNode* node){
-        if (!node) return;
-        addVals(node->left);
+        if (node->left != NULL) addVals(node->left);
         vals.push_back(node->val);
-        addVals(node->right);
+        if (node->right != NULL) addVals(node->right);
     }
 public:
     TreeNode* increasingBST(TreeNode* root){
