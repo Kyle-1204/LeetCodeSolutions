@@ -16,8 +16,8 @@ public:
         for (int i = start; i > end; i--){
             num *= 10;
             num += str[i] - '0';
-            if (num > INT_MAX) return 0;
         }
+        if (num > INT_MAX) return 0;
         num *= sign;
         return (int) num;
     }
