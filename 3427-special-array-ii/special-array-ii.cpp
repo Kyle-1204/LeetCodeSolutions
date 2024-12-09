@@ -9,10 +9,7 @@ public:
             nextFalses[i-1] = nextFalse;
         }
         vector<bool> ans(qSize);
-        for (int i = 0; i < qSize; i++){
-            int start = queries[i][0], end = queries[i][1];
-            ans[i] = (nextFalses[start] > end ? true : false);
-        }
+        for (int i = 0; i < qSize; i++) ans[i] = (nextFalses[queries[i][0]] > queries[i][1] ? true : false);
         return ans;
     }
 };
