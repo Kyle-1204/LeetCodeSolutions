@@ -1,10 +1,13 @@
 class Solution {
 public:
     int minimumLength(string s) {
-        unordered_map<char, int> mp;
+        vector<int> chars(26);
         int ans = 0;
-        for (auto& chr: s) mp[chr]++;
-        for (auto& val: mp) ans += (val.second % 2 ? 1 : 2);
+        for (auto& chr: s) {
+            chars[chr - 'a']++;
+            if (chars[chr - 'a'] < 3 || chars[chr -'a'] % 2 == 0) ans++;
+            else ans--;
+        }
         return ans;
     }
 };
