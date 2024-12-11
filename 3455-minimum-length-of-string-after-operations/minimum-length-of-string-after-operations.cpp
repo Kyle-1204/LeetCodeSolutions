@@ -4,8 +4,9 @@ public:
         vector<int> chars(26);
         int ans = 0;
         for (auto& chr: s) {
-            chars[chr - 'a']++;
-            if (chars[chr - 'a'] < 3 || chars[chr -'a'] % 2 == 0) ans++;
+            int i = chr - 'a';
+            chars[i]++;
+            if (chars[i] < 3 || chars[i] % 2 == 0) ans++;
             else ans--;
         }
         return ans;
