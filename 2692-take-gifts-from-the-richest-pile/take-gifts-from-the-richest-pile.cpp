@@ -1,11 +1,18 @@
 class Solution {
 public:
     long long pickGifts(vector<int>& gifts, int k) {
-        int end = gifts.size() - 1;
+        priority_queue<long long> pq;
+        long long numRemaining = 0;
+        for (auto& gift: gifts) pq.push(gift);
         while (k--){
-            sort(gifts.begin(), gifts.end());
-            gifts[end] = sqrt(gifts[end]);
+            long long sqRoot = sqrt(pq.top());
+            pq.pop();
+            pq.push(sqRoot);
         }
-        return accumulate(gifts.begin(), gifts.end(), 0LL);
+        while(!pq.empty()){
+            numRemaining += pq.top();
+            pq.pop();
+        }
+        return numRemaining;
     }
 };
