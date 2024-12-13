@@ -11,9 +11,9 @@ public:
             int index = pq.top().second;
             if (marks[index] == 0){
                 ans += pq.top().first;
-                marks[index]++;
-                if (index > 0) marks[index - 1]++;
-                if (index < size - 1) marks[index + 1]++;
+                marks[index] = 1;
+                if (index > 0) marks[index - 1] = 1;
+                if (index < size - 1) marks[index + 1] = 1;
             }
             pq.pop();
         }
