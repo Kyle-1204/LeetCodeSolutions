@@ -2,17 +2,18 @@ class Solution {
 public:
     typedef pair<int, int> pi; 
     long long findScore(vector<int>& nums) {
-        unordered_set<int> set;
+        int size = nums.size();
+        vector<int> marks(size);
         priority_queue<pi, vector<pi>, greater<pi>> pq;
         long long ans = 0;
-        for (int i = 0; i < nums.size(); i++) pq.push(make_pair(nums[i], i));
+        for (int i = 0; i < size; i++) pq.push(make_pair(nums[i], i));
         while (!pq.empty()){
             int index = pq.top().second;
-            if (set.find(index) == set.end()){
+            if (marks[index] == 0){
                 ans += pq.top().first;
-                set.insert(index);
-                set.insert(index + 1);
-                set.insert(index - 1);
+                marks[index]++;
+                if (index > 0) marks[index - 1]++;
+                if (index < size - 1) marks[index + 1]++;
             }
             pq.pop();
         }
