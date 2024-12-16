@@ -2,9 +2,9 @@ class Solution {
 public:
     int findLHS(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        int maxSub = 0, size = nums.size(), left = 0, currMin = nums[0];
+        int maxSub = 0, size = nums.size(), left = 0, right = 1;
         while (left < size){
-            int currMin = nums[left], right = left + 1;
+            int currMin = nums[left];
             while (right < size && nums[right] == currMin) right++;
             if (right < size && nums[right] == currMin + 1){
                 while (right < size && nums[right] == currMin + 1) right++;
