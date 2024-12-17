@@ -9,17 +9,16 @@ public:
             if (chars[index] == 0) pq.push(chr);
             chars[index]++;
         }
-        char lastChar = ' ';
+        char second = ' ';
         while (!pq.empty()){
             char top = pq.top();
             int index = top - 'a', minRange = min(chars[index], repeatLimit);
-            if (top == lastChar && minRange == repeatLimit) minRange--;
+            if (top == second && minRange == repeatLimit) minRange--;
             ans += string(minRange, top);
             chars[index] -= minRange;
             pq.pop();
             if (pq.empty()) return ans;
-            char second = pq.top();
-            lastChar = second;
+            second = pq.top();
             ans += second;
             chars[second - 'a']--;
             if (chars[second - 'a'] == 0) pq.pop();
