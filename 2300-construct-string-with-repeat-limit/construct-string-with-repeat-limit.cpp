@@ -14,9 +14,8 @@ public:
             char top = pq.top();
             int index = top - 'a', minRange = min(chars[index], repeatLimit);
             if (top == lastChar && minRange == repeatLimit) minRange--;
-            for (int i = 0; i < minRange; i++) ans += top;
+            ans += string(minRange, top);
             chars[index] -= minRange;
-            //cout << top << "  " << chars[index] << endl;
             pq.pop();
             if (pq.empty()) return ans;
             char second = pq.top();
@@ -24,7 +23,7 @@ public:
             ans += second;
             chars[second - 'a']--;
             if (chars[second - 'a'] == 0) pq.pop();
-            if (chars[index])pq.push(top);
+            if (chars[index]) pq.push(top);
         }
         return ans;
     }
