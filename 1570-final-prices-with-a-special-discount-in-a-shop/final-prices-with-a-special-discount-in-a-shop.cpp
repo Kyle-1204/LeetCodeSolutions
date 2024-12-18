@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> finalPrices(vector<int>& prices) {
         int size = prices.size();
-        for (int left = 0; left < size; left++){
+        for (int left = 0; left < size - 1; left++){
             int right = left + 1, discount = 0;
             while (right < size){
                 if (prices[left] >= prices[right]){
