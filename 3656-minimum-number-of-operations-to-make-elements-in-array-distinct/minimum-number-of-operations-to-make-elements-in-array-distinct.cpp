@@ -1,11 +1,10 @@
 class Solution {
 public:
     int minimumOperations(vector<int>& nums) {
-        unordered_map<int, int> mp;
-        int ans = 0;
+        unordered_set<int> st;
         for (int i = nums.size() - 1; i >= 0; i--){
-            if (mp.find(nums[i]) != mp.end()) return i/3 + 1;
-            else mp[nums[i]]++;
+            if (st.find(nums[i]) != st.end()) return i/3 + 1;
+            else st.insert(nums[i]);
         }
         return 0;
     }
