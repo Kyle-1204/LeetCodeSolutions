@@ -25,7 +25,6 @@ private:
                 swap(arr[i], arr[min_idx]);
             }
         }
-        cout << endl;
     }
 public:
     int minimumOperations(TreeNode* root) {
