@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minimumArea(vector<vector<int>>& grid) {
-        int minX = INT_MAX, maxX = -1, minY = INT_MAX, maxY = -1, xLen = grid[0].size(), yLen = grid.size();
+        int xLen = grid[0].size(), yLen = grid.size(), minX = xLen, maxX = 0, minY = yLen, maxY = 0;
         for (int i = 0; i < yLen; i++){
             for (int j = 0; j < xLen; j++){
                 if (grid[i][j] == 1){
