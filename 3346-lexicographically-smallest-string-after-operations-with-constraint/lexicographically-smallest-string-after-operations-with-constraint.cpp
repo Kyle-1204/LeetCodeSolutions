@@ -9,7 +9,7 @@ public:
             }
             else{
                 s[i] -= k;
-                k = 0;
+                return s;
             }
             i++;
         }
