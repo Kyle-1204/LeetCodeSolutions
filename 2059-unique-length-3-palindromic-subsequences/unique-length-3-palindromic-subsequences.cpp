@@ -12,7 +12,13 @@ public:
         for (int i = 0; i < 26; i++){
             if (last[i]){
                 char chr = i + 'a';
-                for (int j = first[i] + 1; j < last[i]; j++) uniqPals.insert(string(1, chr) + s[j] + string(1, chr));
+                for (int j = first[i] + 1; j < last[i]; j++) {
+                    string sub;
+                    sub += chr;
+                    sub += s[j];
+                    sub += chr;
+                    uniqPals.insert(sub);
+                }
             }
         }
         return uniqPals.size();
