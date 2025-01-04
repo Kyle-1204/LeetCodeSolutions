@@ -7,9 +7,9 @@ public:
         while (pq.top() < k){
             long long first = pq.top();
             pq.pop();
-            long long second = pq.top(), newVal = min(first, second) * 2 + max(first, second);
+            long long second = pq.top();
             pq.pop();
-            pq.push(newVal);
+            pq.push(first * 2 + second);
             numOpps++;
         }
         return numOpps;
