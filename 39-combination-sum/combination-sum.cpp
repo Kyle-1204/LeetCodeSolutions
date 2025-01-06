@@ -2,11 +2,12 @@ class Solution {
 private:
     vector<vector<int>> ans;
     void findCombos(int index, int sum, int target, vector<int> candidates, vector<int> currVect){
-        if (sum >= target || index >= candidates.size()){
+        int size = candidates.size();
+        if (sum >= target || index >= size){
             if (sum == target) ans.push_back(currVect);
             return;
         }
-        for (int i = index; i < candidates.size(); i++){
+        for (int i = index; i < size; i++){
             vector<int> newVect = currVect;
             newVect.push_back(candidates[i]);
             findCombos(i, sum + candidates[i], target, candidates, newVect);
