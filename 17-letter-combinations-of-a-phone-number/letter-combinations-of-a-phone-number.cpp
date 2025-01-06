@@ -10,7 +10,7 @@ private:
             return;
         }
         string letters = mp[digits[index++]];
-        for (auto& letter: letters) findCombos(currString + letter, digits, index);
+        for (int i = 0; i < letters.length(); i++) findCombos(currString + letters[i], digits, index);
     }
 public:
     vector<string> letterCombinations(string digits) {
