@@ -6,8 +6,7 @@ public:
     }
     
     int pick(int target) {
-        int size = mp[target].size();
-        return mp[target][rand() % size];
+        return mp[target][rand() % mp[target].size()];
     }
 };
 
