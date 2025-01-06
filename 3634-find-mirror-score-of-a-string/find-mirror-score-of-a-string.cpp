@@ -6,12 +6,12 @@ public:
         string reverses = "zyxwvutsrqponmlkjihgfedcba";
         vector<stack<int>> tracker(26);
         for (int i = 0; i < len; i++){
-            int index = s[i] - 'a';
-            if (!(tracker[reverses[index]- 'a']).empty()){
-                ans += i - tracker[reverses[index] - 'a'].top();
-                tracker[reverses[index]- 'a'].pop();
+            int index = reverses[s[i] - 'a'] - 'a';
+            if (!(tracker[index]).empty()){
+                ans += i - tracker[index].top();
+                tracker[index].pop();
             }
-            else tracker[index].push(i);
+            else tracker[s[i] - 'a'].push(i);
         }
         return ans;
     }
