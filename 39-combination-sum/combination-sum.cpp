@@ -3,7 +3,7 @@ private:
     vector<vector<int>> ans;
     void findCombos(int index, int currVal, vector<int> candidates, vector<int> currVect){
         int size = candidates.size();
-        if (currVal <= 0 || index >= size){
+        if (currVal <= 0){
             if (currVal == 0) ans.push_back(currVect);
             return;
         }
