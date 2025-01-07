@@ -6,8 +6,7 @@ public:
     }
     
     int pick(int target) {
-        vector<int> vect = mp[target];
-        return vect[rand() % vect.size()];
+        return mp[target][rand() % mp[target].size()];
     }
 };
 
