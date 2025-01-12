@@ -11,7 +11,7 @@ public:
             mp[nums[start]]--;
             if (mp[nums[start]] == 0) mp.erase(nums[start]);
             mp[nums[i]]++;
-            ans[i - k + 1] = mp.size();
+            ans[start + 1] = mp.size();
         }
         return ans;
     }
