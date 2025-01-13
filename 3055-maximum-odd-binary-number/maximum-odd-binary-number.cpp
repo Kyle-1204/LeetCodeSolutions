@@ -3,7 +3,7 @@ public:
     string maximumOddBinaryNumber(string s) {
         string res;
         bool oddFound = false;
-        for (auto& chr: s){
+        for (char chr: s){
             if (chr == '0') res += '0';
             else if (oddFound) res = '1' + res;
             else oddFound = true;
