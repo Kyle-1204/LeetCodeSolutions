@@ -4,14 +4,16 @@ public:
         int numSetBits = __builtin_popcount(num2), ans = 0, exp = 0;
         vector<int> pows;
         while (num1){
-            if (num1 % 2) pows.push_back(exp);
+            if (num1 % 2) {
+                pows.push_back(exp);
+                ans += pow(2, exp);
+            }
             exp++;
             num1 /= 2;
         }
         int size = pows.size();
         if (size <= numSetBits){
             numSetBits -= size;
-            for (auto& val: pows) ans += pow(2, val);
             int currPow = 0, powIndex = 0;
             while (numSetBits){
                 if (powIndex < size && currPow == pows[powIndex]) powIndex++;
@@ -23,9 +25,7 @@ public:
             }
         }
         else {
-            for (int i = 0; i < numSetBits; i++){
-                ans += pow(2, pows[size - i - 1]);
-            }
+            for (int i = 0; i < size - numSetBits; i++) ans -= pow(2, pows[i]);
         }
         return ans;
     }
