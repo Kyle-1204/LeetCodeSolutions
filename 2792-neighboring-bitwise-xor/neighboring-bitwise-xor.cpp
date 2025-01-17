@@ -1,9 +1,9 @@
 class Solution {
 public:
     bool doesValidArrayExist(vector<int>& derived) {
-        int currBit = 0;
+        bool currBit = false;
         for (auto& bit: derived){
-            if (bit == 1) currBit = (currBit == 0 ? 1 : 0);
+            if (bit == 1) currBit = !currBit;
         }
         return (currBit == 0);
     }
