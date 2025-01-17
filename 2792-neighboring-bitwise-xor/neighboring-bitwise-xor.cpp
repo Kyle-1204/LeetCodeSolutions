@@ -1,10 +1,10 @@
 class Solution {
 public:
     bool doesValidArrayExist(vector<int>& derived) {
-        bool currBit = false;
+        bool currBit = true;
         for (auto& bit: derived){
             if (bit == 1) currBit = !currBit;
         }
-        return (currBit == 0);
+        return currBit;
     }
 };
