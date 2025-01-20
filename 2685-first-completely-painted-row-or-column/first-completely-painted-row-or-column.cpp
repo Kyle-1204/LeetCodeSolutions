@@ -3,7 +3,6 @@ public:
     int firstCompleteIndex(vector<int>& arr, vector<vector<int>>& mat) {
         unordered_map<int, pair<int, int>> indices;
         int m = mat.size(), n = mat[0].size(), size = arr.size();
-        cout << m << "   " << n << endl;
         vector<int> rows(m), cols(n);
         for (int i = 0; i < m; i++){
             for (int j = 0; j < n; j++){
@@ -13,10 +12,8 @@ public:
         for (int i = 0; i < size; i++){
             int num = arr[i], row = indices[num].first, col = indices[num].second;
             rows[row]++;
-            //cout << rows[row] << "  ";
             if (rows[row] == n) return i;
             cols[col]++;
-            //cout << cols[col] << endl;
             if (cols[col] == m) return i;
         }
         return size;
