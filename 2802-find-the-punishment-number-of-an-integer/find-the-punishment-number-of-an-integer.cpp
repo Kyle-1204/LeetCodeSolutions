@@ -1,23 +1,24 @@
-class Solution {
-private:
-    bool canPartition(string s,int target) {
-    if (s=="" && target==0) return true;
-    if (target<0) return false;
-
-    for(int i=0;i<s.size();i++){
-        if (canPartition(s.substr(i + 1) , target - stoi(s.substr(0, i + 1)))) {return true;}
-    }
+bool CanMake(int num, int target) {
+  if (target < 0 || num < target) {
     return false;
+  }
+  if (num == target) {
+    return true;
+  }
+  return CanMake(num / 10, target - num % 10) || CanMake(num / 100, target - num % 100) ||
+      CanMake(num / 1000, target - num % 1000);
 }
+
+class Solution {
 public:
-    int punishmentNumber(int n) {
-        int pNum = 0;
-        for (int num = 1; num <= n; num++){
-            int sqr = num * num;
-            if (canPartition(to_string(sqr), num)) {
-                pNum += sqr;
-            }
-        }
-        return pNum;
+  int punishmentNumber(int n) {
+    int answer = 0;
+    for (int i = 1; i <= n; ++i) {
+      int num = i * i;
+      if (CanMake(num, i)) {
+        answer += num;
+      }
     }
+    return answer;
+  }
 };
