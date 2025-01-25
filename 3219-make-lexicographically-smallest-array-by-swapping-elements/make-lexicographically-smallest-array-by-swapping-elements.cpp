@@ -1,5 +1,6 @@
 class Solution {
 public:
+    //have to redo, misread problem and kinda over it lmfaooo
     vector<int> lexicographicallySmallestArray(vector<int>& nums, int limit) {
         vector<int> numsSorted(nums);
         sort(numsSorted.begin(), numsSorted.end());
