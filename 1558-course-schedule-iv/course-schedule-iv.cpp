@@ -1,6 +1,7 @@
 class Solution {
 public:
     //whatever lol
+    // update: wait i was close omg, just need a data structure to store already visited nodes
     // Performs DFS and returns true if there's a path between src and target
     // and false otherwise.
     bool isPrerequisite(unordered_map<int, vector<int>>& adjList,
