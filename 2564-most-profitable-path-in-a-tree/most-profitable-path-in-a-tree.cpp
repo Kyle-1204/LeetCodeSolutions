@@ -2,7 +2,7 @@ class Solution {
 private:
     unordered_map<int, int> path;
     vector<bool> visited;
-    vector<vector<int>> graph;
+    vector<vector<int>> tree;
 
     //Depth First Search
     bool DFS(int src, int time){
@@ -16,7 +16,7 @@ private:
         }
 
         // Traverse through unvisited nodes
-        for(auto adj: graph[src]){
+        for(auto adj: tree[src]){
             if(!visited[adj]){
                 if(DFS(adj, time + 1)){
                     return true;
@@ -31,15 +31,15 @@ private:
 public:
     int mostProfitablePath(vector<vector<int>>& edges, int bob, vector<int>& amount) {
         int n = edges.size() + 1, maxVal = INT_MIN;
-        graph.resize(n);
+        tree.resize(n);
         visited.assign(n, false);
         queue<vector<int>> nodeQueue;
         nodeQueue.push({0, 0, 0});
 
         // Form tree with edges
         for(auto edge: edges){
-            graph[edge[0]].push_back(edge[1]);
-            graph[edge[1]].push_back(edge[0]);
+            tree[edge[0]].push_back(edge[1]);
+            tree[edge[1]].push_back(edge[0]);
         }
         
         // Find the path taken by bob to reach node 0 and the times it takes to get there
@@ -60,17 +60,17 @@ public:
                 income += (amount[src]/2);
             }
        
-            // Update max value if current node is a leaf
-            if(graph[src].size() == 1 && src != 0){
+            // Update max value if current node is a new leaf
+            if(tree[src].size() == 1 && src != 0){
                 maxVal = max(maxVal, income);
             }
 			// Explore adjacent unvisited vertices
-            for(auto adj: graph[src]){
+            for(auto adj: tree[src]){
                 if(!visited[adj]){
                     nodeQueue.push({adj, time+1, income});
                 }
             }
-            
+
             // Mark and remove current node
             visited[src] = true;
             nodeQueue.pop();
