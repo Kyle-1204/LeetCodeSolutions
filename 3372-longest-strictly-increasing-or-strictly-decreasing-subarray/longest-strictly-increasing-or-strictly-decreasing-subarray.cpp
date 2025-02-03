@@ -2,7 +2,7 @@ class Solution {
 public:
     int longestMonotonicSubarray(vector<int>& nums) {
         int left = 0, size = nums.size(), maxVal = 1;
-        while (left < size){
+        for(int left = 0; left < size; left++){
             int incStart = nums[left], decStart = nums[left];
             int checkInc = left + 1, checkDec = checkInc;
             while (checkInc < size && nums[checkInc] > incStart){
@@ -15,7 +15,6 @@ public:
             }
             maxVal = max(max(checkDec, checkInc) - left, maxVal);
             if (maxVal > size - left) return maxVal;
-            left++;
         }
         return maxVal;
     }
