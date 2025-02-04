@@ -3,41 +3,54 @@ private:
     unordered_map<int, int> bobPath;
     vector<bool> visited;
     vector<vector<int>> tree;
-    int maxVal = INT_MIN;
+    int maxIncome = INT_MIN;
 
     // Depth First Search to find Bob's path
     bool findBobPath(int sourceNode, int time) {
+        // Mark and set time node is reached
         bobPath[sourceNode] = time;
         visited[sourceNode] = true;
+
+        // Destination for Bob is found
         if (sourceNode == 0) return true;
 
-        for (auto adjacentNode : tree[sourceNode]) {
+        // Traverse through unvisited nodes
+        for (int adjacentNode : tree[sourceNode]) {
             if (!visited[adjacentNode] && findBobPath(adjacentNode, time + 1)) {
                 return true;
             }
         }
+
+        // If node 0 isn't reached, remove current node from path
         bobPath.erase(sourceNode);
         return false;
     }
 
-    // Depth First Search to find the most profitable path
-    void dfs(int src, int time, int income, vector<int>& amount) {
-        visited[src] = true;
+    // Depth First Search to find Alice's optimal path
+    void findAlicePath(int sourceNode, int time, int income, vector<int>& amount) {
+        // Mark node as explored
+        visited[sourceNode] = true;
 
-        if (bobPath.find(src) == bobPath.end() || time < bobPath[src]) {
-            income += amount[src];
-        } else if (time == bobPath[src]) {
-            income += (amount[src] / 2);
+        // Alice reaches the node first
+        if (bobPath.find(sourceNode) == bobPath.end() || time < bobPath[sourceNode]) {
+            income += amount[sourceNode];
+        } 
+
+        // Alice and Bob reach the node at the same time
+        else if (time == bobPath[sourceNode]) {
+            income += (amount[sourceNode] / 2);
         }
 
-        // If current node is a leaf and not the root
-        if (tree[src].size() == 1 && src != 0) {
-            maxVal = max(maxVal, income);
+        // Update max value if current node is a new leaf
+        if (tree[sourceNode].size() == 1 && sourceNode != 0) {
+            maxIncome = max(maxIncome, income);
+            return;
         }
         
-        for (auto adjacentNode : tree[src]) {
+        // Traverse through unvisited nodes
+        for (int adjacentNode : tree[sourceNode]) {
             if (!visited[adjacentNode]) {
-                dfs(adjacentNode, time + 1, income, amount);
+                findAlicePath(adjacentNode, time + 1, income, amount);
             }
         }
     }
@@ -48,15 +61,19 @@ public:
         tree.resize(n);
         visited.assign(n, false);
 
+        // Form tree with edges
         for (auto edge : edges) {
             tree[edge[0]].push_back(edge[1]);
             tree[edge[1]].push_back(edge[0]);
         }
 
+        // Find the path taken by Bob to reach node 0 and the times it takes to get there
         findBobPath(bob, 0);
+
+        // Find Alice's optimal path
         visited.assign(n, false);
-        dfs(0, 0, 0, amount);
+        findAlicePath(0, 0, 0, amount);
         
-        return maxVal;
+        return maxIncome;
     }
 };
