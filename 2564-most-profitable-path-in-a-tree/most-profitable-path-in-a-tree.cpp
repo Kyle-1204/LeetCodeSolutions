@@ -1,80 +1,61 @@
 class Solution {
 private:
-    unordered_map<int, int> path;
+    unordered_map<int, int> bobPath;
     vector<bool> visited;
     vector<vector<int>> tree;
+    int maxVal = INT_MIN;
 
-    //Depth First Search
-    bool DFS(int src, int time){
-        // Mark and set time node is reached
-        path[src] = time;
+    // Depth First Search to find Bob's path
+    bool findBobPath(int sourceNode, int time) {
+        bobPath[sourceNode] = time;
+        visited[sourceNode] = true;
+        if (sourceNode == 0) return true;
+
+        for (auto adjacentNode : tree[sourceNode]) {
+            if (!visited[adjacentNode] && findBobPath(adjacentNode, time + 1)) {
+                return true;
+            }
+        }
+        bobPath.erase(sourceNode);
+        return false;
+    }
+
+    // Depth First Search to find the most profitable path
+    void dfs(int src, int time, int income, vector<int>& amount) {
         visited[src] = true;
 
-        // Destination for Bob is found
-        if(src == 0){
-            return true;
+        if (bobPath.find(src) == bobPath.end() || time < bobPath[src]) {
+            income += amount[src];
+        } else if (time == bobPath[src]) {
+            income += (amount[src] / 2);
         }
 
-        // Traverse through unvisited nodes
-        for(auto adj: tree[src]){
-            if(!visited[adj]){
-                if(DFS(adj, time + 1)){
-                    return true;
-                }
+        // If current node is a leaf and not the root
+        if (tree[src].size() == 1 && src != 0) {
+            maxVal = max(maxVal, income);
+        }
+        
+        for (auto adjacentNode : tree[src]) {
+            if (!visited[adjacentNode]) {
+                dfs(adjacentNode, time + 1, income, amount);
             }
-        }   
-        // If node 0 isn't reached, remove current node from path
-        path.erase(src);
-        return false;
+        }
     }
 
 public:
     int mostProfitablePath(vector<vector<int>>& edges, int bob, vector<int>& amount) {
-        int n = edges.size() + 1, maxVal = INT_MIN;
+        int n = edges.size() + 1;
         tree.resize(n);
         visited.assign(n, false);
-        queue<vector<int>> nodeQueue;
-        nodeQueue.push({0, 0, 0});
 
-        // Form tree with edges
-        for(auto edge: edges){
+        for (auto edge : edges) {
             tree[edge[0]].push_back(edge[1]);
             tree[edge[1]].push_back(edge[0]);
         }
-        
-        // Find the path taken by bob to reach node 0 and the times it takes to get there
-        DFS(bob, 0);
 
-        //Breadth First Search
+        findBobPath(bob, 0);
         visited.assign(n, false);
-        while(!nodeQueue.empty()){
-            int src = nodeQueue.front()[0], time = nodeQueue.front()[1], income = nodeQueue.front()[2];
-
-            // Alice reaches the node first
-            if (path.find(src) == path.end() || time < path[src]) {
-                income += amount[src];
-            }
-
-            // Alice and Bob reach the node at the same time
-            else if (time == path[src]){
-                income += (amount[src]/2);
-            }
-       
-            // Update max value if current node is a new leaf
-            if(tree[src].size() == 1 && src != 0){
-                maxVal = max(maxVal, income);
-            }
-			// Explore adjacent unvisited vertices
-            for(auto adj: tree[src]){
-                if(!visited[adj]){
-                    nodeQueue.push({adj, time+1, income});
-                }
-            }
-
-            // Mark and remove current node
-            visited[src] = true;
-            nodeQueue.pop();
-        }
+        dfs(0, 0, 0, amount);
         
         return maxVal;
     }
