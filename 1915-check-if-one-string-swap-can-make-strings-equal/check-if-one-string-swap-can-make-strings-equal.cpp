@@ -5,10 +5,7 @@ public:
         char chr1, chr2;
         for (int i = 0; i < s1.length(); i++){
             if (s1[i] != s2[i]){
-                if (numDiff == 1){
-                    if (chr1 != s2[i] || chr2 != s1[i]) return false;
-                }
-                else if (numDiff > 1) return false;
+                if ((numDiff == 1 && (chr1 != s2[i] || chr2 != s1[i])) || numDiff > 1) return false;
                 else{
                     chr1 = s1[i];
                     chr2 = s2[i];
