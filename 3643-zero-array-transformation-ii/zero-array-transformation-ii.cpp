@@ -1,24 +1,23 @@
 class Solution {
 public:
     int minZeroArray(vector<int>& nums, vector<vector<int>>& queries) {
-        int n = nums.size();
-        vector<int> cnt(n + 1, 0);
-        int s = 0, k = 0;
+        int size = nums.size();
+        vector<int> count(size + 1);
+        int sum = 0, k = 0;
 
-        for (int i = 0; i < n; ++i) {
-            while (s + cnt[i] < nums[i]) {
+        for (int index = 0; index < size; index++) {
+            while (sum + count[index] < nums[index]) {
                 k++; // Increment k before accessing queries
                 if (k - 1 >= queries.size()) {
                     return -1;
                 }
-                int l = queries[k - 1][0], r = queries[k - 1][1], val = queries[k - 1][2];
-                if (r < i) {
-                    continue;
+                int left = queries[k - 1][0], right = queries[k - 1][1], val = queries[k - 1][2];
+                if (right >= index) {
+                    count[max(left, index)] += val;
+                    count[right + 1] -= val;
                 }
-                cnt[max(l, i)] += val;
-                cnt[r + 1] -= val;
             }
-            s += cnt[i];
+            sum += count[index];
         }
         return k;
     }
