@@ -19,10 +19,10 @@ private:
     bool currentIndexZero(vector<int>& nums, vector<vector<int>>& queries, int m){
         int n = nums.size(), sum = 0;
         vector<int> differenceArray(n + 1, 0);
-        for (int i = 0; i < m; i++) {
-            int start = queries[i][0], end = queries[i][1], val = queries[i][2];
+        for (int queryIndex = 0; queryIndex < m; queryIndex++) {
+            int start = queries[queryIndex][0], end = queries[queryIndex][1], val = queries[queryIndex][2];
             differenceArray[start] += val;
-            if (end + 1 < n) differenceArray[end + 1] -= val;
+            differenceArray[end + 1] -= val;
         }
         for (int i = 0; i < n; ++i) {
             sum += differenceArray[i];
