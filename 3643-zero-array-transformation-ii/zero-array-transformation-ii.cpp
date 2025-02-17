@@ -3,6 +3,7 @@ public:
     int minZeroArray(vector<int>& nums, vector<vector<int>>& queries) {
         int n = nums.size(), left = 0, right = queries.size();
 
+        //
         if (!currentIndexZero(nums, queries, right)) return -1;
         
         while (left <= right) {
@@ -16,17 +17,17 @@ public:
         return left;
     }
 private:
-    bool currentIndexZero(vector<int>& nums, vector<vector<int>>& queries, int m){
+    bool currentIndexZero(vector<int>& nums, vector<vector<int>>& queries, int k){
         int n = nums.size(), sum = 0;
-        vector<int> differenceArray(n + 1, 0);
-        for (int queryIndex = 0; queryIndex < m; queryIndex++) {
+        vector<int> differenceArray(n + 1);
+        for (int queryIndex = 0; queryIndex < k; queryIndex++) {
             int start = queries[queryIndex][0], end = queries[queryIndex][1], val = queries[queryIndex][2];
             differenceArray[start] += val;
             differenceArray[end + 1] -= val;
         }
-        for (int i = 0; i < n; ++i) {
-            sum += differenceArray[i];
-            if (sum < nums[i]) return false;
+        for (int numIndex = 0; numIndex < n; numIndex++) {
+            sum += differenceArray[numIndex];
+            if (sum < nums[numIndex]) return false;
         }
         return true;
     }
