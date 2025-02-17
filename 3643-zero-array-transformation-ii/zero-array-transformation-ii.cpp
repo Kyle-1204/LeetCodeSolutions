@@ -34,7 +34,7 @@ public:
         return l;
     }
 private:
-    bool currentIndexZero(vector<int> nums, vector<vector<int>> queries, int m){
+    bool currentIndexZero(vector<int>& nums, vector<vector<int>>& queries, int m){
         int n = nums.size();
         vector<int> arr(n + 1, 0);
         for (int i = 0; i < m; ++i) {
