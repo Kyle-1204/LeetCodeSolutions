@@ -14,8 +14,7 @@ private:
             strs.push_back(str);
             return;
         }
-        for (int i = 'a'; i < 'd'; i++){
-            char chr = char (i);
+        for (auto& chr: {'a', 'b', 'c'}){
             if (len == 0 || str.back() != chr) generateStrings(str + chr, n);
         }
     }
