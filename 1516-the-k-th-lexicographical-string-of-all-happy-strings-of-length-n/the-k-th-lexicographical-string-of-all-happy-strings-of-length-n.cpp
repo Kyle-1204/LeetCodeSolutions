@@ -3,7 +3,7 @@ public:
     string getHappyString(int n, int k) {
         generateStrings("", n);
         if (strs.size() < k) return "";
-        sort(strs.begin(), strs.end());
+        //sort(strs.begin(), strs.end());
         return strs[k - 1];
     }
 private:
