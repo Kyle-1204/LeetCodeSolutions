@@ -17,7 +17,6 @@ public:
     }
     
     bool find(int target) {
-        rootNode->val = 0;
         return traverse(rootNode, target, 0);
     }
 
