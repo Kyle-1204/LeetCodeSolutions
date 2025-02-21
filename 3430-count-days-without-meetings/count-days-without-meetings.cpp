@@ -1,28 +1,40 @@
 class Solution {
 public:
     int countDays(int days, vector<vector<int>>& meetings) {
-        if (meetings.empty()) return days; 
-        
-        sort(meetings.begin(), meetings.end()); // Sort meetings by start time
-        
-        int numDaysWithoutMeetings = 0;
-        int lastEnd = 0; // Tracks end of the last meeting
+        //vector<int> vect(days + 1);
+        map<int, int> dayMap;
+        int prefixSum = 0, freeDays = 0, previousDay = days;
+        bool hasGap = false;
 
-        for (auto& meeting : meetings) {
-            int start = meeting[0], end = meeting[1];
-            
-            // Count free days before the current meeting
-            if (start > lastEnd + 1) {
-                numDaysWithoutMeetings += start - lastEnd - 1;
-            }
-            
-            // Update lastEnd to track merged meetings
-            lastEnd = max(lastEnd, end);
+        for (auto& meeting: meetings){
+            // Set first day of meetings
+            previousDay = min(previousDay, meeting[0]);
+
+            //Process start and end of meeting
+            dayMap[meeting[0]]++;
+            dayMap[meeting[1] + 1]--;
         }
-        
-        // Count free days after the last meeting
-        numDaysWithoutMeetings += days - lastEnd;
 
-        return numDaysWithoutMeetings;
+        //Add all days before the first day of meetings
+        freeDays += (previousDay - 1);
+        for (auto& day: dayMap){
+
+            //Add current range of days without a meeting
+            if (hasGap){
+                freeDays += day.first - previousDay;
+                hasGap = false;
+            }
+            prefixSum += day.second;
+
+            //No meetings at the current day
+            if (prefixSum == 0) {
+                hasGap = true;
+            }
+            previousDay = day.first;
+        }
+
+        //Add all days after the last day of meetings
+        freeDays += days - previousDay + 1;
+        return freeDays;
     }
 };
