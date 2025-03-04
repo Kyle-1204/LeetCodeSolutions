@@ -1,33 +1,26 @@
 class Solution {
 public:
     int countDays(int days, vector<vector<int>>& meetings) {
-        map<int, int> dayMap;
-        int prefixSum = 0, freeDays = 0, previousDay = days;
-        bool hasGap = false;
+        int freeDays = 0, latestEnd = 0;
+
+        // Sort meetings based on starting times
+        sort(meetings.begin(), meetings.end());
 
         for (auto& meeting : meetings) {
-            // Set first day of meetings
-            previousDay = min(previousDay, meeting[0]);
+            int start = meeting[0], end = meeting[1];
 
-            // Process start and end of meeting
-            dayMap[meeting[0]]++;
-            dayMap[meeting[1] + 1]--;
-        }
-
-        // Add all days before the first day of meetings
-        freeDays += (previousDay - 1);
-        for (auto& day : dayMap) {
-            int currentDay = day.first;
             // Add current range of days without a meeting
-            if (prefixSum == 0) {
-                freeDays += currentDay - previousDay;
+            if (start > latestEnd + 1) {
+                freeDays += start - latestEnd - 1;
             }
-            prefixSum += day.second;
-            previousDay = currentDay;
+
+            // Update latest meeting end
+            latestEnd = max(latestEnd, end);
         }
 
         // Add all days after the last day of meetings
-        freeDays += days - previousDay + 1;
+        freeDays += days - latestEnd;
+
         return freeDays;
     }
 };
