@@ -1,20 +1,15 @@
 class Solution {
 public:
     bool checkPowersOfThree(int n) {
-        int power = 0;
-        while (pow(3, power) < n) power++;
-        return pow(3, power) == n || findPower(n, power);
-    }
+        while (n > 0) {
+            // Check if this power should be used twice
+            if (n % 3 == 2) return false;
 
-private:
-    bool findPower(int n, int power){
-        //cout << n << endl;
-        if (n == 0) return true;
-        if (n < 0) return false;
-        bool isPower = false;
-        while (power-- > 0){
-            isPower = isPower || findPower(n - pow(3, power), power);
+            // Divide n by 3 to move to the next greater power
+            n /= 3;
         }
-        return isPower;
+
+        // The ternary representation of n consists only of 0s and 1s
+        return true;
     }
 };
