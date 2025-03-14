@@ -10,13 +10,13 @@ public:
 
 private:
     bool hasUniqueDigits(int num){
-        unordered_set<int> digits;
+        vector<int> digits(10);
         while (num){
-            if (digits.find(num % 10) == digits.end()){
-                digits.insert(num % 10);
+            if (digits[num % 10]) return false;
+            else {
+                digits[num % 10]++;
                 num /= 10;
             }
-            else return false;
         }
         return true;
     }
