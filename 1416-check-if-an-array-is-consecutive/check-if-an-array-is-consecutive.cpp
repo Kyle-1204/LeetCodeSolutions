@@ -7,7 +7,6 @@ public:
             int num = nums[i];
             if (num >= x && num <= x + n - 1 && vals[num - x] == 0) vals[num - x] = 1;
         }
-        cout << accumulate(vals.begin(), vals.end(), 0) << endl;
         return accumulate(vals.begin(), vals.end(), 0) == n;
     }
 };
