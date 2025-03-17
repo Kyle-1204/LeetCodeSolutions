@@ -1,7 +1,7 @@
 class Solution {
 public:
     int longestContinuousSubstring(string s) {
-        int ans = 1, currLen = 1;
+        int ans = 1, currLen;
         char currChar = ' ';
         for (auto& chr: s){
             if (chr - currChar == 1){
