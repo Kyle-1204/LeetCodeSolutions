@@ -10,6 +10,6 @@ public:
                 numOpps++;
             }
         }
-        return (accumulate(nums.begin(), nums.end(), 0) == size ? numOpps : -1);
+        return (nums[size - 2] == 1 && nums[size - 1] == 1 ? numOpps : -1);
     }
 };
