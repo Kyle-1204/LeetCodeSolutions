@@ -2,11 +2,11 @@ class Solution {
 public:
     int numberOfSpecialSubstrings(string s) {
         int ans = 0, len = s.length(), right = 0;
-        unordered_map<char, int> mp;
+        vector<int> chars(26);
         for (int left = 0; left < len; left++){
-            while (right < len && mp[s[right]] == 0) mp[s[right++]]++;
+            while (right < len && chars[s[right] - 'a'] == 0) chars[s[right++] - 'a']++;
             ans += right - left;
-            mp[s[left]]--;
+            chars[s[left] - 'a']--;
         }
         return ans;
     }
