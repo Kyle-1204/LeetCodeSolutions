@@ -10,6 +10,6 @@ public:
                 numOpps++;
             }
         }
-        return (nums[size - 2] == 1 && nums[size - 1] == 1 ? numOpps : -1);
+        return (nums[size - 2] == 0 || nums[size - 1] == 0 ? -1 : numOpps);
     }
 };
