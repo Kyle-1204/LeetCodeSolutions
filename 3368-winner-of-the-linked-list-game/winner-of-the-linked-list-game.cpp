@@ -13,11 +13,8 @@ public:
     string gameResult(ListNode* head) {
         int oddWins = 0, evenWins = 0;
         while (head != NULL){
-            int first = head->val, second = head->next->val;
-            if (first % 2 != second % 2){
-                if (first < second) oddWins++;
-                else evenWins++;
-            }
+            if (head->val < head->next->val) oddWins++;
+            else evenWins++;
             head = head->next->next;
         }
         if (oddWins > evenWins) return "Odd";
