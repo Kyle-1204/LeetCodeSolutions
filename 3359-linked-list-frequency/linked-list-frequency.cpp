@@ -16,7 +16,7 @@ public:
             mp[head->val]++;
             head = head->next;
         }
-        ListNode* node = new ListNode(0);
+        ListNode* node = new ListNode();
         head = node;
         for (auto& val: mp){
             node->next = new ListNode(val.second);
