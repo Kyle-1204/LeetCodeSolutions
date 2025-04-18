@@ -17,6 +17,7 @@ private:
                 count = 1;
             }
         }
-        return recursiveBuild(newSeq + to_string(count) + currChr, n - 1);
+        newSeq += to_string(count) + currChr;
+        return recursiveBuild(newSeq, n - 1);
     }
 };
