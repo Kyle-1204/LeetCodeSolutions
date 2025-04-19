@@ -5,7 +5,7 @@ public:
         int size = nums.size() - 1,  start = 0, left = 1;
         sort(nums.begin(), nums.end());
         int currNum = nums[0];
-        while (start < size && currNum + nums[start + 1] < lower) start++;
+        while (start < size && currNum + nums[start+1] < lower) start++;
         int right = start;
         while (right < size && currNum + nums[right+1] <= upper) right++;
         numPairs += (right - start);
