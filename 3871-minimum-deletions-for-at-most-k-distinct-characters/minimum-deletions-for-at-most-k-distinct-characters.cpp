@@ -9,11 +9,7 @@ public:
         for (auto& count: mp) counts.push_back(count.second);
         sort(counts.begin(), counts.end());
         int ans = 0, i = 0;
-        while (k < numChars){
-            cout << counts[i] << endl;
-            ans += counts[i++];
-            numChars--;
-        }
+        while (k < numChars--) ans += counts[i++];
         return ans;
     }
 };
