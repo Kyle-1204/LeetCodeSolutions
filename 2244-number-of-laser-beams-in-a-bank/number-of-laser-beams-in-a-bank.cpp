@@ -1,17 +1,17 @@
 class Solution {
 public:
     int numberOfBeams(vector<string>& bank) {
-        int prevVal = 0, numLasers = 0;
+        int numOnes = 0, ans = 0;
         for (auto& row: bank){
-            int currVal = 0;
+            int currRow = 0;
             for (auto& cell: row){
-                if (cell == '1') currVal++;
+                if (cell == '1'){
+                    ans += numOnes;
+                    currRow++;
+                }
             }
-            if (currVal){
-                numLasers += (prevVal * currVal);
-                prevVal = currVal;
-            }
+            if (currRow) numOnes = currRow;
         }
-        return numLasers;
+        return ans;
     }
 };
