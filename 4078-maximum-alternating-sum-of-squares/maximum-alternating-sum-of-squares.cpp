@@ -14,7 +14,10 @@ public:
                 currNum = pow(nums[right], 2);
                 right--;
             }
-            if (add-- > 0) ans += currNum;
+            if (add) {
+                ans += currNum;
+                add--;
+            }
             else ans -= currNum;
         }
         return ans;
