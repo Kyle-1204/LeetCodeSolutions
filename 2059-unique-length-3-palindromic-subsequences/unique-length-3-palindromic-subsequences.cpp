@@ -2,22 +2,21 @@ class Solution {
 public:
     int countPalindromicSubsequence(string s) {
         unordered_set<string> uniqPals;
-        vector<int> first(26, -1), last(26); //char, index
-        int len = s.length();
-        for (int i = 0; i < len; i++) {
-            char chr = s[i];
-            if (first[chr - 'a'] == -1) first[chr - 'a'] = i;
-            else last[chr - 'a'] = i;
+        vector<int> firsts(26, -1), lasts(26);
+        for (int i = 0; i < s.length(); i++){
+            int chr = s[i] - 'a';
+            if (firsts[chr] == -1) firsts[chr] = i;
+            else lasts[chr] = i;
         }
         for (int i = 0; i < 26; i++){
-            if (last[i]){
-                char chr = i + 'a';
-                for (int j = first[i] + 1; j < last[i]; j++) {
-                    string sub;
-                    sub += chr;
-                    sub += s[j];
-                    sub += chr;
-                    uniqPals.insert(sub);
+            if (lasts[i]){
+                for (int j = firsts[i] + 1; j < lasts[i]; j++){
+                    char chr = i + 'a';
+                    string str;
+                    str += chr;
+                    str += s[j];
+                    str += chr;
+                    uniqPals.insert(str);
                 }
             }
         }
