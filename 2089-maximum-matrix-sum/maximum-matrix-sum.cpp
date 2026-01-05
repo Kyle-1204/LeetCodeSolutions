@@ -1,22 +1,17 @@
 class Solution {
 public:
     long long maxMatrixSum(vector<vector<int>>& matrix) {
-        long long sum = 0;
-        int numNegative = 0, minVal = INT_MAX;
+        long long ans = 0;
+        bool negCountOdd = false;
+        int minAbsVal = INT_MAX;
         for (auto& row: matrix){
             for (auto& val: row){
-                if (val < 0) {
-                    int absVal = abs(val);
-                    sum += absVal;
-                    numNegative++;
-                    minVal = min(minVal, absVal);
-                }
-                else{
-                    sum += val;
-                    minVal = min(minVal, val);
-                }
+                ans += abs(val);
+                if (val < 0) negCountOdd = !negCountOdd;
+                minAbsVal = min(minAbsVal, abs(val));
             }
         }
-        return (numNegative % 2 ? sum - (2 * minVal) : sum);
+        if (negCountOdd) ans -= 2 * minAbsVal;
+        return ans;
     }
 };
