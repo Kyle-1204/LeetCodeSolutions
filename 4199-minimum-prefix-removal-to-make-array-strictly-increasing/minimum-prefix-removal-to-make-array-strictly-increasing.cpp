@@ -1,8 +1,8 @@
 class Solution {
 public:
     int minimumPrefixLength(vector<int>& nums) {
-        int len = nums.size(), lastElement = INT_MAX;
-        for (int i = len - 1; i >= 0; i--){
+        int lastElement = nums[nums.size() - 1];
+        for (int i = nums.size() - 2; i >= 0; i--){
             if (nums[i] < lastElement) lastElement = nums[i];
             else return i + 1;
         }
