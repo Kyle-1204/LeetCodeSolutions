@@ -1,13 +1,14 @@
 class Solution {
 public:
     int digitFrequencyScore(int n) {
+        vector<int> digits(10);
         unordered_map<int, int> mp;
         while (n){
-            mp[n % 10]++;
+            digits[n % 10]++;
             n /= 10;
         }
         int score = 0;
-        for (auto& val: mp) score += val.first * val.second;
+        for (int i = 1; i < digits.size(); i++) score += i * digits[i];
         return score;
     }
 };
