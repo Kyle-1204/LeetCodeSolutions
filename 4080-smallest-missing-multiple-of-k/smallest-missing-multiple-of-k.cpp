@@ -1,15 +1,12 @@
 class Solution {
 public:
     int missingMultiple(vector<int>& nums, int k) {
-        int ans = k, mult = 1;
-        unordered_set<int> numSet;
+        int minVal = k;
+        unordered_map<int, int> mp;
         for (auto& num: nums){
-            numSet.insert(num);
-            while (numSet.find(k * mult) != numSet.end()){
-                mult++;
-                ans += k;
-            }
+            mp[num]++;
+            while(mp.find(minVal) != mp.end()) minVal += k;
         }
-        return ans;
+        return minVal;
     }
 };
